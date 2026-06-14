@@ -235,7 +235,7 @@ async function supabaseRequest(path, options = {}) {
     throw error;
   }
 
-  return Array.isArray(payload) ? payload[0] : payload;
+  return payload;
 }
 
 async function insertSupabaseRecord(table, record) {

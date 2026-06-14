@@ -234,7 +234,7 @@ async function upsertFinanceRecord(intent, payment, product) {
     payment_method: "Mercado Pago",
     reference,
     related_student_id: null,
-    related_payment_id: paymentId,
+    related_payment_id: null,
     notes: [
       `Fuente: ${LANDING_SOURCE}`,
       `Prospecto: ${intent.prospect_id}`,
