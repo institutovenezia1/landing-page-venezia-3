@@ -36,6 +36,12 @@ function parseSignatureHeader(value) {
     }, {});
 }
 
+function maskSignature(value) {
+  const text = String(value || "");
+  if (text.length <= 16) return text;
+  return `${text.slice(0, 8)}...${text.slice(-8)}`;
+}
+
 function safeEqualHex(left, right) {
   if (!left || !right || left.length !== right.length) return false;
 
@@ -46,28 +52,82 @@ function safeEqualHex(left, right) {
   }
 }
 
+function buildSignatureManifest({ dataIdUrl, requestId, timestamp }) {
+  return [
+    dataIdUrl ? `id:${String(dataIdUrl).toLowerCase()};` : "",
+    requestId ? `request-id:${requestId};` : "",
+    timestamp ? `ts:${timestamp};` : "",
+  ].join("");
+}
+
 function verifyWebhookSignature({ request, requestUrl, paymentId }) {
   const secret = getRequiredEnv("MERCADOPAGO_WEBHOOK_SECRET");
   if (!secret) {
-    return { configured: false, valid: false, skipped: true };
+    return {
+      configured: false,
+      valid: false,
+      skipped: true,
+      reason: "missing_secret",
+      diagnostics: {
+        receivedHeader: "",
+        receivedV1: "",
+        calculatedV1: "",
+        manifest: "",
+        dataIdUrl: "",
+        bodyPaymentId: paymentId ? String(paymentId) : "",
+      },
+    };
   }
 
   const xSignature = getHeader(request, "x-signature");
   const xRequestId = getHeader(request, "x-request-id");
   const signatureParts = parseSignatureHeader(xSignature);
-  const dataId = (requestUrl.searchParams.get("data.id") || paymentId || "").toLowerCase();
+  const dataIdUrl = requestUrl.searchParams.get("data.id") || "";
+  const manifest = buildSignatureManifest({
+    dataIdUrl,
+    requestId: xRequestId || "",
+    timestamp: signatureParts.ts || "",
+  });
 
-  if (!signatureParts.ts || !signatureParts.v1 || !xRequestId || !dataId) {
-    return { configured: true, valid: false, skipped: false };
+  if (!signatureParts.ts || !signatureParts.v1 || !manifest) {
+    return {
+      configured: true,
+      valid: false,
+      skipped: false,
+      reason: "missing_signature_parts",
+      diagnostics: {
+        receivedHeader: xSignature || "",
+        receivedV1: signatureParts.v1 || "",
+        calculatedV1: "",
+        manifest,
+        dataIdUrl,
+        requestId: xRequestId || "",
+        timestamp: signatureParts.ts || "",
+        bodyPaymentId: paymentId ? String(paymentId) : "",
+      },
+    };
   }
 
-  const manifest = `id:${dataId};request-id:${xRequestId};ts:${signatureParts.ts};`;
-  const expected = crypto.createHmac("sha256", secret).update(manifest).digest("hex");
+  const calculated = crypto.createHmac("sha256", secret).update(manifest).digest("hex");
+  const valid = safeEqualHex(calculated, signatureParts.v1);
 
   return {
     configured: true,
-    valid: safeEqualHex(expected, signatureParts.v1),
+    valid,
     skipped: false,
+    reason: valid ? "valid" : "mismatch",
+    diagnostics: {
+      receivedHeader: xSignature || "",
+      receivedV1: signatureParts.v1 || "",
+      receivedV1Masked: maskSignature(signatureParts.v1),
+      calculatedV1: calculated,
+      calculatedV1Masked: maskSignature(calculated),
+      manifest,
+      dataIdUrl,
+      requestId: xRequestId || "",
+      timestamp: signatureParts.ts || "",
+      bodyPaymentId: paymentId ? String(paymentId) : "",
+    },
   };
 }
 
@@ -191,6 +251,11 @@ async function upsertFinanceRecord(intent, payment, product) {
 
 async function recordWebhookEvent({ payload, paymentId, request, signature, processed, processingError }) {
   try {
+    const eventPayload =
+      payload && typeof payload === "object"
+        ? { ...payload, _signature: signature.diagnostics || {} }
+        : { value: payload, _signature: signature.diagnostics || {} };
+
     return await insertSupabaseRecord("mercadopago_webhook_events", {
       id: crypto.randomUUID(),
       event_id: payload && payload.id ? String(payload.id) : "",
@@ -200,7 +265,7 @@ async function recordWebhookEvent({ payload, paymentId, request, signature, proc
       payment_id: paymentId ? String(paymentId) : "",
       signature_valid: Boolean(signature.valid),
       request_id: getHeader(request, "x-request-id") || "",
-      payload: payload || {},
+      payload: eventPayload,
       processed: Boolean(processed),
       processing_error: processingError || "",
       created_at: new Date().toISOString(),

@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "serve:static": "python3 -m http.server 5173",
-    "check": "node --check script.js && node --check api/create-prospect.js && node --check api/create-checkout.js && node --check api/mercadopago-webhook.js && node --check api/_lib/prospect-flow.js"
+    "check": "node --check script.js && node --check api/create-prospect.js && node --check api/create-checkout.js && node --check api/mercadopago-webhook.js && node --check api/_lib/prospect-flow.js && node --check scripts/reprocess-mercadopago-payment.js"
   },
   "engines": {
     "node": ">=18"
