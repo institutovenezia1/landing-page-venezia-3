@@ -618,6 +618,20 @@ h3 {
   font-weight: 850;
 }
 
+.form-status.is-loading {
+  background: rgba(212, 175, 55, 0.16);
+}
+
+.form-status.is-error {
+  background: rgba(210, 38, 38, 0.12);
+  color: #7f1515;
+}
+
+.form-submit:disabled {
+  cursor: wait;
+  opacity: 0.82;
+}
+
 .site-footer {
   display: flex;
   align-items: center;
