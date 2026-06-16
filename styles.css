@@ -93,10 +93,11 @@ img {
 
 .hero {
   display: grid;
-  grid-template-columns: minmax(0, 0.95fr) minmax(420px, 1fr);
+  grid-template-columns: minmax(0, 760px);
+  justify-content: center;
   gap: 44px;
   width: min(1180px, calc(100% - 48px));
-  min-height: calc(100svh - 70px);
+  min-height: auto;
   align-items: center;
   margin: 0 auto;
   padding: 26px 0 48px;
@@ -194,6 +195,17 @@ h3 {
   font-weight: 850;
 }
 
+.price-copy {
+  display: grid;
+  gap: 2px;
+}
+
+.price-copy small {
+  color: var(--text-soft);
+  font-size: 0.74rem;
+  font-weight: 850;
+}
+
 .price-row strong {
   font-size: 1.35rem;
 }
@@ -231,6 +243,8 @@ h3 {
 }
 
 .scarcity-alert {
+  display: grid;
+  gap: 3px;
   margin: 0;
   border: 1px solid rgba(212, 175, 55, 0.5);
   border-radius: 8px;
@@ -238,6 +252,16 @@ h3 {
   background: rgba(212, 175, 55, 0.12);
   color: var(--black);
   font-weight: 900;
+}
+
+.scarcity-alert strong {
+  font-weight: 950;
+}
+
+.scarcity-alert small {
+  color: var(--text-soft);
+  font-size: 0.82rem;
+  font-weight: 800;
 }
 
 .button {
@@ -380,6 +404,74 @@ h3 {
 
 .offer-action strong {
   font-size: 4.25rem;
+}
+
+.graduation-section {
+  background: var(--paper-warm);
+}
+
+.graduation-inner {
+  display: grid;
+  gap: 28px;
+}
+
+.graduation-photo {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  border-radius: 8px;
+  object-fit: cover;
+  object-position: center;
+  box-shadow: var(--shadow);
+}
+
+.graduation-heading {
+  max-width: 900px;
+  margin-bottom: 0;
+}
+
+.testimonial-section {
+  background: var(--white);
+}
+
+.testimonial-section-alt {
+  background: var(--paper-warm);
+}
+
+.testimonial-layout {
+  display: grid;
+  grid-template-columns: minmax(320px, 0.9fr) minmax(0, 1fr);
+  gap: 42px;
+  width: min(1180px, calc(100% - 48px));
+  align-items: center;
+  margin: 0 auto;
+  padding: 78px 0;
+}
+
+.testimonial-photo {
+  width: 100%;
+  max-height: 620px;
+  aspect-ratio: 4 / 5;
+  border-radius: 8px;
+  object-fit: cover;
+  object-position: center 20%;
+  box-shadow: var(--shadow);
+}
+
+.testimonial-copy {
+  display: grid;
+  gap: 12px;
+}
+
+.testimonial-copy h2 {
+  max-width: 620px;
+}
+
+.testimonial-copy p:not(.eyebrow) {
+  max-width: 640px;
+  margin-bottom: 0;
+  color: var(--text-soft);
+  font-size: 1.45rem;
+  font-weight: 780;
 }
 
 .benefits-section {
@@ -689,6 +781,7 @@ h3 {
   .offer-grid,
   .course-grid,
   .story-grid,
+  .testimonial-layout,
   .reservation-layout {
     grid-template-columns: 1fr;
   }
@@ -721,6 +814,7 @@ h3 {
   .hero,
   .section-inner,
   .choice-inner,
+  .testimonial-layout,
   .reservation-layout {
     width: calc(100% - 32px);
   }
@@ -733,6 +827,20 @@ h3 {
   .hero-visual img {
     height: 260px;
     min-height: 260px;
+  }
+
+  .graduation-photo {
+    aspect-ratio: 4 / 3;
+  }
+
+  .testimonial-layout {
+    gap: 22px;
+    padding: 56px 0;
+  }
+
+  .testimonial-photo {
+    max-height: none;
+    aspect-ratio: 4 / 5;
   }
 
   h1 {

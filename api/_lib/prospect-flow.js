@@ -10,8 +10,8 @@ const COURSES = {
 };
 
 const RESERVATION_TYPES = {
-  apartado_399: "Apartado $399",
-  inscripcion_999: "Inscripción Completa $999",
+  apartado_399: "Apartado $399.99",
+  inscripcion_999: "Inscripción Completa $999.99",
 };
 
 const PAYMENT_PRODUCTS = {
@@ -19,7 +19,7 @@ const PAYMENT_PRODUCTS = {
     key: "apartado_399",
     title: "Apartado Venezia 3.0",
     label: RESERVATION_TYPES.apartado_399,
-    amount: 399,
+    amount: 399.99,
     currency: "MXN",
     approvedStatus: "Apartado Pagado",
     financeCategory: "Apartado",
@@ -28,7 +28,7 @@ const PAYMENT_PRODUCTS = {
     key: "inscripcion_999",
     title: "Inscripción completa Venezia 3.0",
     label: RESERVATION_TYPES.inscripcion_999,
-    amount: 999,
+    amount: 999.99,
     currency: "MXN",
     approvedStatus: "Inscripción Pagada",
     financeCategory: "Inscripción",

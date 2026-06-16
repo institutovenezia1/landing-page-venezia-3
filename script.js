@@ -2,8 +2,8 @@ const reservationForm = document.querySelector("#reservationForm");
 const formStatus = document.querySelector("#formStatus");
 
 const reservationAmounts = {
-  apartado_399: 399,
-  inscripcion_999: 999,
+  apartado_399: 399.99,
+  inscripcion_999: 999.99,
 };
 
 function setFormStatus(message, tone = "info") {
@@ -16,7 +16,7 @@ function setFormStatus(message, tone = "info") {
 
 function getSelectedReservationAmount(formData) {
   const selectedReservation = String(formData.get("tipoReserva") || "apartado_399");
-  return reservationAmounts[selectedReservation] || 399;
+  return reservationAmounts[selectedReservation] || 399.99;
 }
 
 function getProspectPayload(formData) {
