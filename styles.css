@@ -160,6 +160,16 @@ h3 {
   font-weight: 780;
 }
 
+.hero-proof-list {
+  display: grid;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  color: var(--black);
+  font-weight: 900;
+  list-style: none;
+}
+
 .hero-offer {
   display: grid;
   gap: 10px;
