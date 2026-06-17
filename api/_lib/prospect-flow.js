@@ -212,6 +212,10 @@ function parseSupabasePayload(text) {
 }
 
 function normalizeSingleRecord(payload) {
+  if (Array.isArray(payload)) {
+    return payload[0] || null;
+  }
+
   return payload;
 }
 
@@ -239,13 +243,23 @@ async function supabaseRequest(path, options = {}) {
 }
 
 async function insertSupabaseRecord(table, record) {
-  return normalizeSingleRecord(
+  const insertedRecord = normalizeSingleRecord(
     await supabaseRequest(table, {
       method: "POST",
       headers: { Prefer: "return=representation" },
       body: record,
     })
   );
+
+  if (!insertedRecord || typeof insertedRecord !== "object" || !insertedRecord.id) {
+    const error = new Error(`Supabase no regreso un registro valido al insertar en ${table}.`);
+    error.status = 500;
+    error.code = "SUPABASE_INSERT_RETURN_MISSING_ID";
+    error.payload = insertedRecord;
+    throw error;
+  }
+
+  return insertedRecord;
 }
 
 async function updateSupabaseRecords(table, query, record) {

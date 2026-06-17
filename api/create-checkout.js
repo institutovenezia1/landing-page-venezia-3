@@ -230,6 +230,16 @@ module.exports = async function createCheckout(request, response) {
     const product = getReservationProduct(formData.tipoReservaKey);
     const baseUrl = getRequestBaseUrl(request);
     const prospect = await insertProspect(buildProspectRecord(formData));
+    const prospectId = prospect.id;
+
+    if (!prospectId) {
+      const prospectIdError = new Error("No se pudo obtener prospect_id despues de crear el prospecto.");
+      prospectIdError.status = 500;
+      prospectIdError.code = "PROSPECT_ID_MISSING";
+      prospectIdError.payload = { prospect };
+      throw prospectIdError;
+    }
+
     const intentId = crypto.randomUUID();
     const paymentIntent = await insertSupabaseRecord(
       "landing_payment_intents",
