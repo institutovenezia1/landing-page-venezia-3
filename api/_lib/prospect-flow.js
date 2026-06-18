@@ -9,6 +9,19 @@ const COURSES = {
   barberia: "Corte y Barbería Profesional",
 };
 
+const COURSE_SCHEDULES = {
+  unas_acrilicas: [
+    "Viernes 9am a 1pm",
+    "Sábado 2pm a 6pm",
+    "Domingo 9am a 1pm",
+  ],
+  barberia: [
+    "Viernes 9am a 1pm",
+    "Sábado 9am a 1pm",
+    "Sábado 1pm a 5pm",
+  ],
+};
+
 const RESERVATION_TYPES = {
   apartado_399: "Apartado $399.99",
   inscripcion_999: "Inscripción Completa $999.99",
@@ -136,14 +149,21 @@ function validateProspectPayload(payload) {
   const nombre = normalizeText(payload.nombre);
   const whatsapp = normalizePhone(payload.whatsapp);
   const cursoKey = normalizeText(payload.curso);
+  const horarioPreferido = normalizeText(payload.horarioPreferido);
   const tipoReservaKey = normalizeText(payload.tipoReserva || "apartado_399");
   const courseLabel = COURSES[cursoKey];
+  const courseSchedules = COURSE_SCHEDULES[cursoKey] || [];
   const tipoReservaLabel = RESERVATION_TYPES[tipoReservaKey];
   const errors = [];
 
   if (nombre.length < 2) errors.push("Nombre requerido.");
   if (whatsapp.length < 10) errors.push("WhatsApp requerido.");
   if (!courseLabel) errors.push("Curso no valido.");
+  if (!horarioPreferido) {
+    errors.push("Horario preferido requerido.");
+  } else if (courseLabel && !courseSchedules.includes(horarioPreferido)) {
+    errors.push("Horario preferido no valido para el curso seleccionado.");
+  }
   if (!tipoReservaLabel) errors.push("Tipo de reserva no valido.");
 
   return {
@@ -154,17 +174,19 @@ function validateProspectPayload(payload) {
       whatsapp,
       cursoKey,
       courseLabel,
+      horarioPreferido,
       tipoReservaKey,
       tipoReservaLabel,
     },
   };
 }
 
-function buildLandingNotes({ courseLabel, tipoReservaLabel, followupDate }) {
+function buildLandingNotes({ courseLabel, horarioPreferido, tipoReservaLabel, followupDate }) {
   return [
     `Lead captado desde ${LANDING_SOURCE}.`,
     `Fuente: ${LANDING_SOURCE}`,
     `Curso: ${courseLabel}`,
+    `Horario preferido: ${horarioPreferido}`,
     `TipoReserva: ${tipoReservaLabel}`,
     "Estado: Pago Pendiente",
     `Acceso de interés: ${DEFAULT_ACCESS_INTEREST}`,
@@ -194,6 +216,7 @@ function buildProspectRecord(formData) {
     suggested_time: "",
     notes: buildLandingNotes({
       courseLabel: formData.courseLabel,
+      horarioPreferido: formData.horarioPreferido,
       tipoReservaLabel: formData.tipoReservaLabel,
       followupDate,
     }),
@@ -285,6 +308,7 @@ function getReservationProduct(tipoReservaKey) {
 
 module.exports = {
   COURSES,
+  COURSE_SCHEDULES,
   DEFAULT_ACCESS_INTEREST,
   DEFAULT_BRANCH,
   LANDING_SOURCE,

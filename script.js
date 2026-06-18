@@ -1,9 +1,24 @@
 const reservationForm = document.querySelector("#reservationForm");
 const formStatus = document.querySelector("#formStatus");
+const courseSelect = reservationForm?.querySelector('select[name="curso"]');
+const preferredScheduleSelect = reservationForm?.querySelector("#preferredSchedule");
 
 const reservationAmounts = {
   apartado_399: 399.99,
   inscripcion_999: 999.99,
+};
+
+const courseSchedules = {
+  unas_acrilicas: [
+    "Viernes 9am a 1pm",
+    "Sábado 2pm a 6pm",
+    "Domingo 9am a 1pm",
+  ],
+  barberia: [
+    "Viernes 9am a 1pm",
+    "Sábado 9am a 1pm",
+    "Sábado 1pm a 5pm",
+  ],
 };
 
 function setFormStatus(message, tone = "info") {
@@ -12,6 +27,31 @@ function setFormStatus(message, tone = "info") {
   formStatus.classList.toggle("is-error", tone === "error");
   formStatus.classList.toggle("is-loading", tone === "loading");
   formStatus.textContent = message;
+}
+
+function setSchedulePlaceholder(message) {
+  if (!preferredScheduleSelect) return;
+
+  preferredScheduleSelect.innerHTML = "";
+  const option = document.createElement("option");
+  option.value = "";
+  option.textContent = message;
+  preferredScheduleSelect.append(option);
+}
+
+function updatePreferredScheduleOptions() {
+  if (!courseSelect || !preferredScheduleSelect) return;
+
+  const schedules = courseSchedules[courseSelect.value] || [];
+  setSchedulePlaceholder(schedules.length ? "Selecciona un horario" : "Selecciona primero un curso");
+  preferredScheduleSelect.disabled = schedules.length === 0;
+
+  for (const schedule of schedules) {
+    const option = document.createElement("option");
+    option.value = schedule;
+    option.textContent = schedule;
+    preferredScheduleSelect.append(option);
+  }
 }
 
 function getSelectedReservationAmount(formData) {
@@ -24,6 +64,7 @@ function getProspectPayload(formData) {
     nombre: String(formData.get("nombre") || "").trim(),
     whatsapp: String(formData.get("whatsapp") || "").trim(),
     curso: String(formData.get("curso") || "").trim(),
+    horarioPreferido: String(formData.get("horarioPreferido") || "").trim(),
     tipoReserva: String(formData.get("tipoReserva") || "apartado_399").trim(),
   };
 }
@@ -44,6 +85,8 @@ function showPaymentReturnMessage() {
 }
 
 showPaymentReturnMessage();
+updatePreferredScheduleOptions();
+courseSelect?.addEventListener("change", updatePreferredScheduleOptions);
 
 reservationForm?.addEventListener("submit", async (event) => {
   event.preventDefault();
