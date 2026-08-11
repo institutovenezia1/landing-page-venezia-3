@@ -10,15 +10,21 @@
 7. Meta Pixel registra eventos con deduplicación por sesión/event ID.
 
 ## Variables esperadas
-No copiar valores aquí. Configurarlas en Vercel y `.env.local`:
+No copiar valores aquí. Configurarlas en Vercel y `.env.local`.
+
+Requeridas (el runtime falla o responde error si faltan):
 - `SUPABASE_URL`
-- `SUPABASE_SERVICE_ROLE_KEY` (solo servidor) o la clave permitida por el diseño
-- `SUPABASE_ANON_KEY` cuando corresponda
-- `MERCADOPAGO_ACCESS_TOKEN`
-- `MERCADOPAGO_WEBHOOK_SECRET` si el webhook lo requiere
-- `MERCADOPAGO_WEBHOOK_URL`
-- `MERCADOPAGO_USE_SANDBOX`
-- `LANDING_BASE_URL`
+- `SUPABASE_SERVICE_ROLE_KEY` o `SUPABASE_ANON_KEY` (basta una de las dos; `SUPABASE_SERVICE_ROLE_KEY` tiene prioridad si ambas están presentes)
+- `MERCADOPAGO_ACCESS_TOKEN` (usada por `/api/create-checkout` y `/api/mercadopago-webhook`)
+
+Opcionales (el código tiene fallback si faltan):
+- `MERCADOPAGO_WEBHOOK_SECRET` — sin ella el webhook procesa notificaciones sin verificar firma; técnicamente opcional pero fuertemente recomendada en producción por seguridad (habilita la validación criptográfica HMAC de Mercado Pago).
+- `MERCADOPAGO_WEBHOOK_URL` — si falta, se infiere como `{baseUrl}/api/mercadopago-webhook`.
+- `LANDING_BASE_URL` — si falta, se infiere del host de la request.
+- `MERCADOPAGO_USE_SANDBOX` — si falta, se asume `false`.
+
+Reservada / uso futuro (el código actual no la lee):
+- `MERCADOPAGO_PUBLIC_KEY` — pensada para un futuro SDK de Mercado Pago en el frontend. El checkout actual usa redirección a Checkout Pro y no la necesita.
 
 ## Estado comercial codificado confirmado
 - Apartado: $399.99

@@ -26,5 +26,5 @@ Landing de conversión para captar prospectos de Tlaxcala, registrar el lead en 
 ## Estado de referencia
 - Repo: `institutovenezia1/landing-page-venezia-3`
 - Rama: `main`
-- Último commit confirmado: `8a0bdb375442b7cd0ae87de67f23f1a119cc45a8`
+- Último commit confirmado: `84cdbc5f6eb578931685cb0f4cefe504ac83661d`
 - Producción conocida: `https://landing-page-venezia-3.vercel.app`

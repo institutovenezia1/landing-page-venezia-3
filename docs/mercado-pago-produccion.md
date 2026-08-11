@@ -2,7 +2,7 @@
 
 ## Variables locales
 
-Colocar en `/Users/venezia1/Documents/Landing Page/.env.local`:
+Colocar en `.env.local`, en la raíz del repositorio clonado localmente:
 
 ```bash
 SUPABASE_URL=...
@@ -19,10 +19,11 @@ MERCADOPAGO_WEBHOOK_URL=https://url-publica-de-la-landing/api/mercadopago-webhoo
 
 Notas:
 
-- `MERCADOPAGO_ACCESS_TOKEN` es privado y solo lo usan `/api/create-checkout` y `/api/mercadopago-webhook`.
-- `MERCADOPAGO_PUBLIC_KEY` queda configurado para uso futuro con SDK frontend. El checkout actual usa redireccion a Checkout Pro.
-- En pruebas locales, `LANDING_BASE_URL` debe ser una URL publica de LocalTunnel, no `localhost`.
-- `MERCADOPAGO_WEBHOOK_SECRET` se copia desde Mercado Pago despues de registrar el webhook.
+- `MERCADOPAGO_ACCESS_TOKEN` es privado y solo lo usan `/api/create-checkout` y `/api/mercadopago-webhook`. Es obligatoria: ambos endpoints devuelven error 500 si falta.
+- `SUPABASE_SERVICE_ROLE_KEY` y `SUPABASE_ANON_KEY` son alternativas entre si: el codigo usa la primera que encuentre (`SUPABASE_SERVICE_ROLE_KEY` tiene prioridad). Solo una de las dos es obligatoria.
+- `MERCADOPAGO_PUBLIC_KEY` **no la lee el codigo actual**. Queda reservada para un futuro SDK de Mercado Pago en el frontend; el checkout actual usa redireccion a Checkout Pro y no la necesita.
+- `LANDING_BASE_URL` y `MERCADOPAGO_WEBHOOK_URL` son opcionales: si faltan, `/api/create-checkout` infiere la URL base a partir de los headers de la request. En pruebas locales, si se define `LANDING_BASE_URL`, debe ser una URL publica de LocalTunnel, no `localhost`.
+- `MERCADOPAGO_WEBHOOK_SECRET` es tecnicamente opcional para el runtime actual: si falta, el webhook procesa las notificaciones sin verificar firma. Sin embargo, en produccion se considera fuertemente recomendada por seguridad, ya que habilita la validacion criptografica (HMAC) de la firma que envia Mercado Pago y evita que se puedan enviar notificaciones falsificadas al endpoint. Se copia desde Mercado Pago despues de registrar el webhook.
 
 ## Variables en Vercel
 
@@ -50,10 +51,10 @@ No hacer deploy hasta aprobar pruebas locales.
 
 ## Migracion Supabase requerida
 
-Ejecutar en Supabase SQL Editor:
+Ejecutar en Supabase SQL Editor el contenido del archivo (ruta relativa a la raíz del repositorio):
 
 ```bash
-/Users/venezia1/Documents/Landing Page/supabase/20260613_landing_payment_tables.sql
+supabase/20260613_landing_payment_tables.sql
 ```
 
 La migracion crea:
@@ -115,8 +116,9 @@ https://TU-SUBDOMINIO.loca.lt/api/mercadopago-webhook
 
 ## Prueba local
 
+Desde la raíz del repositorio clonado localmente:
+
 ```bash
-cd "/Users/venezia1/Documents/Landing Page"
 npx --yes vercel dev --listen 0.0.0.0:5173
 npx --yes localtunnel --port 5173
 ```
