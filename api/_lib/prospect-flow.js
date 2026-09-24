@@ -11,14 +11,18 @@ const COURSES = {
 
 const COURSE_SCHEDULES = {
   unas_acrilicas: [
-    "Viernes 9am a 1pm",
-    "Sábado 2pm a 6pm",
-    "Domingo 9am a 1pm",
+    "Martes 9am a 11am",
+    "Martes 3pm a 5pm",
+    "Miércoles 9am a 11am",
+    "Miércoles 3pm a 5pm",
+    "Jueves 9am a 1pm",
+    "Viernes 2pm a 6pm",
   ],
   barberia: [
-    "Viernes 9am a 1pm",
-    "Sábado 9am a 1pm",
-    "Sábado 1pm a 5pm",
+    "Viernes 12pm a 3pm",
+    "Sábado 12pm a 3pm",
+    "Sábado 4pm a 7pm",
+    "Domingo 9am a 12pm",
   ],
 };
 
