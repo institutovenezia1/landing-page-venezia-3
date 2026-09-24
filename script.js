@@ -2,6 +2,7 @@ const reservationForm = document.querySelector("#reservationForm");
 const formStatus = document.querySelector("#formStatus");
 const courseSelect = reservationForm?.querySelector('select[name="curso"]');
 const preferredScheduleSelect = reservationForm?.querySelector("#preferredSchedule");
+const scheduleStartHint = reservationForm?.querySelector("#scheduleStartHint");
 const metaEventStoragePrefix = "venezia_meta_pixel_event";
 
 const reservationAmounts = {
@@ -11,10 +12,8 @@ const reservationAmounts = {
 
 const courseSchedules = {
   unas_acrilicas: [
-    "Martes 9am a 11am",
-    "Martes 3pm a 5pm",
-    "Miércoles 9am a 11am",
-    "Miércoles 3pm a 5pm",
+    "Martes y Miércoles 9am a 11am",
+    "Martes y Miércoles 3pm a 5pm",
     "Jueves 9am a 1pm",
     "Viernes 2pm a 6pm",
   ],
@@ -24,6 +23,22 @@ const courseSchedules = {
     "Sábado 4pm a 7pm",
     "Domingo 9am a 12pm",
   ],
+};
+
+// Fecha de inicio de cada grupo; se muestra al elegir el horario.
+const scheduleStartDates = {
+  unas_acrilicas: {
+    "Martes y Miércoles 9am a 11am": "martes 20 de octubre",
+    "Martes y Miércoles 3pm a 5pm": "martes 20 de octubre",
+    "Jueves 9am a 1pm": "jueves 15 de octubre",
+    "Viernes 2pm a 6pm": "viernes 16 de octubre",
+  },
+  barberia: {
+    "Viernes 12pm a 3pm": "viernes 16 de octubre",
+    "Sábado 12pm a 3pm": "sábado 17 de octubre",
+    "Sábado 4pm a 7pm": "sábado 17 de octubre",
+    "Domingo 9am a 12pm": "domingo 18 de octubre",
+  },
 };
 
 function setFormStatus(message, tone = "info") {
@@ -79,6 +94,16 @@ function updatePreferredScheduleOptions() {
     option.textContent = schedule;
     preferredScheduleSelect.append(option);
   }
+
+  updateScheduleStartHint();
+}
+
+function updateScheduleStartHint() {
+  if (!scheduleStartHint || !courseSelect || !preferredScheduleSelect) return;
+
+  const startDate = scheduleStartDates[courseSelect.value]?.[preferredScheduleSelect.value];
+  scheduleStartHint.hidden = !startDate;
+  scheduleStartHint.textContent = startDate ? `📅 Tu grupo inicia el ${startDate} de 2026.` : "";
 }
 
 function getSelectedReservationAmount(formData) {
@@ -121,6 +146,7 @@ function showPaymentReturnMessage() {
 showPaymentReturnMessage();
 updatePreferredScheduleOptions();
 courseSelect?.addEventListener("change", updatePreferredScheduleOptions);
+preferredScheduleSelect?.addEventListener("change", updateScheduleStartHint);
 
 reservationForm?.addEventListener("submit", async (event) => {
   event.preventDefault();

@@ -11,10 +11,8 @@ const COURSES = {
 
 const COURSE_SCHEDULES = {
   unas_acrilicas: [
-    "Martes 9am a 11am",
-    "Martes 3pm a 5pm",
-    "Miércoles 9am a 11am",
-    "Miércoles 3pm a 5pm",
+    "Martes y Miércoles 9am a 11am",
+    "Martes y Miércoles 3pm a 5pm",
     "Jueves 9am a 1pm",
     "Viernes 2pm a 6pm",
   ],

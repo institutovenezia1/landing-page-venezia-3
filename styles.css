@@ -561,6 +561,26 @@ h3 {
   font-weight: 850;
 }
 
+.schedule-list li small {
+  display: block;
+  margin-top: 2px;
+  color: var(--text-soft);
+  font-size: 0.82rem;
+  font-weight: 800;
+}
+
+.schedule-start-hint {
+  display: block;
+  margin-top: 8px;
+  color: var(--green-dark);
+  font-size: 0.86rem;
+  font-weight: 850;
+}
+
+.schedule-start-hint[hidden] {
+  display: none;
+}
+
 .schedule-disclaimer {
   border: 1px solid rgba(212, 175, 55, 0.5);
   border-radius: 8px;
