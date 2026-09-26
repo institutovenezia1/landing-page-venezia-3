@@ -12,7 +12,7 @@
       rel="icon"
       href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%2325D366'/%3E%3Ctext x='32' y='42' text-anchor='middle' font-family='Arial' font-size='34' font-weight='900' fill='%23111111'%3EV%3C/text%3E%3C/svg%3E"
     >
-    <link rel="preload" as="image" href="images/graduacion.jpg">
+    <link rel="preload" as="image" href="assets/hero-graduacion.jpg">
     <link rel="stylesheet" href="styles.css">
     <script>
       !function(f,b,e,v,n,t,s)
@@ -37,56 +37,34 @@
         alt=""
       >
     </noscript>
-    <header class="site-header" aria-label="Navegación principal">
-      <a class="brand" href="#hero" aria-label="Venezia">
-        <span class="brand-mark">V</span>
-        <span class="brand-name">Venezia</span>
-      </a>
-      <a class="header-cta" href="#reserva">APARTAR $399.99</a>
-    </header>
-
     <main>
       <section class="hero" id="hero" aria-labelledby="hero-title">
+        <img
+          class="hero-bg"
+          src="assets/hero-graduacion.jpg"
+          alt=""
+          aria-hidden="true"
+          fetchpriority="high"
+          onerror="this.onerror=null;this.src='images/graduacion.jpg';"
+        >
+        <div class="hero-overlay" aria-hidden="true"></div>
+
+        <nav class="hero-nav" aria-label="Navegación principal">
+          <a class="hero-logo" href="#hero" aria-label="Venezia">VENEZIA</a>
+          <a class="hero-nav-cta" href="#reserva">Aparta $399.99</a>
+        </nav>
+
         <div class="hero-content">
-          <p class="eyebrow gold">BECA VENEZIA</p>
-          <h1 id="hero-title">CAMBIA TU VIDA HOY<br>POR SOLO $399.99</h1>
+          <p class="hero-badge">BECA VENEZIA</p>
+          <h1 id="hero-title">Cambia tu vida hoy</h1>
           <p class="hero-subtitle">
-            Aprende un oficio. No necesitas experiencia previa.
+            Aprende un oficio sin experiencia previa. Aparta tu lugar con $399.99
+            y arranca tu carrera en belleza.
           </p>
-
-          <ul class="hero-proof-list" aria-label="Beneficios principales">
-            <li>✓ Sin experiencia</li>
-            <li>✓ Horarios flexibles</li>
-            <li>✓ Aparta con $399.99</li>
-          </ul>
-
-          <div class="hero-offer" aria-label="Oferta principal">
-            <div class="price-row">
-              <span class="price-copy">
-                <span>Inscripción normal</span>
-                <small>Mensualidad: $1,900</small>
-              </span>
-              <strong class="old-price">$2,300</strong>
-            </div>
-            <div class="price-row">
-              <span class="price-copy">
-                <span>Con Beca Venezia</span>
-                <small>Mensualidad: $1,600</small>
-              </span>
-              <strong class="gold-price">$999.99</strong>
-            </div>
-            <div class="deposit-panel">
-              <span>APARTA TU LUGAR HOY</span>
-              <strong>$399.99</strong>
-            </div>
+          <div class="hero-actions">
+            <a class="hero-cta" href="#reserva">Quiero apartar mi lugar</a>
+            <p class="hero-trust"><span class="hero-trust-dot" aria-hidden="true">●</span> +100 alumnas ya se graduaron</p>
           </div>
-
-          <p class="scarcity-alert">
-            <strong>🔥 ÚLTIMOS 3 CUPOS CON EL 80% DE MATERIAL</strong>
-            <small>Para tus prácticas dentro del salón de clases.</small>
-          </p>
-
-          <a class="button button-primary" href="#reserva">🟢 APARTAR MI LUGAR</a>
         </div>
       </section>
 
@@ -150,14 +128,15 @@
                 <span class="schedule-icon" aria-hidden="true">💅</span>
                 <div>
                   <h3>Uñas Acrílicas Profesionales</h3>
-                  <p class="schedule-start">📅 Inicio: 26 de junio</p>
+                  <p class="schedule-start">📅 Inicio según el horario que elijas</p>
                 </div>
               </div>
-              <p class="weekly-note">1 día de clases por semana</p>
+              <p class="weekly-note">Jueves o viernes: 1 día por semana · Martes y Miércoles: 2 días por semana</p>
               <ul class="schedule-list">
-                <li>Viernes 9:00 am a 1:00 pm</li>
-                <li>Sábado 2:00 pm a 6:00 pm</li>
-                <li>Domingo 9:00 am a 1:00 pm</li>
+                <li>Martes y Miércoles 9:00 am a 11:00 am<small>Inicia martes 20 de octubre</small></li>
+                <li>Martes y Miércoles 3:00 pm a 5:00 pm<small>Inicia martes 20 de octubre</small></li>
+                <li>Jueves 9:00 am a 1:00 pm<small>Inicia jueves 15 de octubre</small></li>
+                <li>Viernes 2:00 pm a 6:00 pm<small>Inicia viernes 16 de octubre</small></li>
               </ul>
             </article>
 
@@ -166,14 +145,15 @@
                 <span class="schedule-icon" aria-hidden="true">💈</span>
                 <div>
                   <h3>Corte y Barbería Profesional</h3>
-                  <p class="schedule-start">📅 Inicio: 26 de junio</p>
+                  <p class="schedule-start">📅 Inicio según el horario que elijas</p>
                 </div>
               </div>
               <p class="weekly-note">1 día de clases por semana</p>
               <ul class="schedule-list">
-                <li>Viernes 9:00 am a 1:00 pm</li>
-                <li>Sábado 9:00 am a 1:00 pm</li>
-                <li>Sábado 1:00 pm a 5:00 pm</li>
+                <li>Viernes 12:00 pm a 3:00 pm<small>Inicia viernes 16 de octubre</small></li>
+                <li>Sábado 12:00 pm a 3:00 pm<small>Inicia sábado 17 de octubre</small></li>
+                <li>Sábado 4:00 pm a 7:00 pm<small>Inicia sábado 17 de octubre</small></li>
+                <li>Domingo 9:00 am a 12:00 pm<small>Inicia domingo 18 de octubre</small></li>
               </ul>
             </article>
           </div>
@@ -227,6 +207,7 @@
               <select name="horarioPreferido" id="preferredSchedule" required disabled>
                 <option value="">Selecciona primero un curso</option>
               </select>
+              <small class="schedule-start-hint" id="scheduleStartHint" aria-live="polite" hidden></small>
             </label>
 
             <fieldset class="reservation-options">
