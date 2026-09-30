@@ -924,6 +924,7 @@ h3 {
 .schedule-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  align-items: start;
   gap: 16px;
 }
 
@@ -1374,6 +1375,10 @@ h3 {
     font-size: 0.6rem;
     line-height: 1.3;
     letter-spacing: 0.01em;
+  }
+
+  .stat-handle {
+    display: none;
   }
 
   .stat-item {
