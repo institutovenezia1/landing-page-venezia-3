@@ -13,6 +13,12 @@
       href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%2325D366'/%3E%3Ctext x='32' y='42' text-anchor='middle' font-family='Arial' font-size='34' font-weight='900' fill='%23111111'%3EV%3C/text%3E%3C/svg%3E"
     >
     <link rel="preload" as="image" href="assets/hero-graduacion.jpg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;1,500&display=swap"
+      rel="stylesheet"
+    >
     <link rel="stylesheet" href="styles.css">
     <script>
       !function(f,b,e,v,n,t,s)
@@ -39,40 +45,36 @@
     </noscript>
     <main>
       <section class="hero" id="hero" aria-labelledby="hero-title">
-        <img
-          class="hero-bg"
-          src="assets/hero-graduacion.jpg"
-          alt=""
-          aria-hidden="true"
-          fetchpriority="high"
-          onerror="this.onerror=null;this.src='images/graduacion.jpg';"
-        >
-        <div class="hero-overlay" aria-hidden="true"></div>
+        <div class="hero-ambient" aria-hidden="true"></div>
 
         <nav class="hero-nav" aria-label="Navegación principal">
           <a class="hero-logo" href="#hero" aria-label="Venezia">VENEZIA</a>
           <a class="hero-nav-cta" href="#reserva">Aparta $399.99</a>
         </nav>
 
-        <div class="hero-content">
-          <p class="hero-badge">BECA VENEZIA</p>
-          <h1 id="hero-title">Cambia tu vida hoy</h1>
-          <p class="hero-subtitle">
-            Aprende un oficio sin experiencia previa. Aparta tu lugar con $399.99
-            y arranca tu carrera en belleza.
-          </p>
-          <div class="hero-actions">
-            <a class="hero-cta" href="#reserva">Quiero apartar mi lugar</a>
-            <p class="hero-trust"><span class="hero-trust-dot" aria-hidden="true">●</span> +100 alumnas ya se graduaron</p>
+        <div class="hero-columns">
+          <div class="hero-content">
+            <p class="hero-badge">BECA VENEZIA</p>
+            <h1 id="hero-title">Cambia tu vida<br><em>hoy</em></h1>
+            <span class="hero-divider" aria-hidden="true"></span>
+            <p class="hero-subtitle">
+              Aprende un oficio sin experiencia previa. Aparta tu lugar con $399.99
+              y arranca tu carrera en belleza.
+            </p>
+            <div class="hero-actions">
+              <a class="hero-cta" href="#reserva">Quiero apartar mi lugar</a>
+              <p class="hero-trust"><span class="hero-trust-dot" aria-hidden="true">●</span> +100 alumnas ya se graduaron</p>
+            </div>
           </div>
-        </div>
-      </section>
 
-      <section class="graduation-section" aria-labelledby="graduation-title">
-        <div class="section-inner graduation-inner">
-          <div class="section-heading graduation-heading">
-            <p class="eyebrow">Historias reales</p>
-            <h2 id="graduation-title">MÁS DE 100 ALUMNAS YA HAN CAMBIADO SU HISTORIA</h2>
+          <div class="hero-media">
+            <img
+              class="hero-photo"
+              src="assets/hero-graduacion.jpg"
+              alt="Alumnas Venezia celebrando su graduación"
+              fetchpriority="high"
+              onerror="this.onerror=null;this.src='images/graduacion.jpg';"
+            >
           </div>
         </div>
       </section>
@@ -113,6 +115,82 @@
               </p>
             </div>
           </article>
+        </div>
+      </section>
+
+      <section class="stats-section" aria-label="Venezia en números y redes">
+        <div class="section-inner stats-inner">
+          <div class="stats-grid">
+            <div class="stat-item">
+              <span class="stat-icon" aria-hidden="true">🎓</span>
+              <strong class="stat-number">+100</strong>
+              <span class="stat-label">Alumnas graduadas</span>
+            </div>
+
+            <a
+              class="stat-item stat-social"
+              href="https://www.instagram.com/institutovenezia1?stkn=Y3lreXowMmc5NGp3&utm_source=qr"
+              target="_blank"
+              rel="noopener"
+            >
+              <span class="stat-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="3" y="3" width="18" height="18" rx="5"></rect>
+                  <circle cx="12" cy="12" r="4"></circle>
+                  <circle cx="17.4" cy="6.6" r="0.9" fill="currentColor" stroke="none"></circle>
+                </svg>
+              </span>
+              <strong class="stat-number">Instagram</strong>
+              <span class="stat-label">@institutovenezia1</span>
+            </a>
+
+            <a
+              class="stat-item stat-social"
+              href="https://www.tiktok.com/@institutovenezia?_r=1&_t=ZS-9A901XJ8pXj"
+              target="_blank"
+              rel="noopener"
+            >
+              <span class="stat-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M16.5 3c.3 1.9 1.6 3.4 3.5 3.8v3a7 7 0 0 1-3.5-1v6.7a5.7 5.7 0 1 1-5.7-5.7c.3 0 .6 0 .9.1v3.1a2.6 2.6 0 1 0 1.8 2.5V3h3z"></path>
+                </svg>
+              </span>
+              <strong class="stat-number">TikTok</strong>
+              <span class="stat-label">@institutovenezia</span>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section class="courses-photo-section" aria-labelledby="courses-photo-title">
+        <div class="section-inner">
+          <div class="section-heading">
+            <p class="eyebrow">Nuestros cursos</p>
+            <h2 id="courses-photo-title">CURSOS DISPONIBLES</h2>
+          </div>
+
+          <div class="courses-photo-grid">
+            <a class="course-photo-card" href="#horarios">
+              <img class="course-photo-img" src="images/curso-unas.jpg" alt="Curso de Uñas Acrílicas Profesionales en Venezia">
+              <span class="course-photo-overlay" aria-hidden="true"></span>
+              <span class="course-photo-body">
+                <h3>Uñas Acrílicas Profesionales</h3>
+                <p>Acrílico, gel y diseño de uñas paso a paso.</p>
+                <span class="course-photo-link">Ver horarios <span aria-hidden="true">→</span></span>
+              </span>
+            </a>
+
+
+            <a class="course-photo-card" href="#horarios">
+              <img class="course-photo-img" src="images/curso-barberia.jpg" alt="Curso de Corte y Barbería Profesional en Venezia">
+              <span class="course-photo-overlay" aria-hidden="true"></span>
+              <span class="course-photo-body">
+                <h3>Corte y Barbería Profesional</h3>
+                <p>Cortes, degradados y arreglo de barba con técnica profesional.</p>
+                <span class="course-photo-link">Ver horarios <span aria-hidden="true">→</span></span>
+              </span>
+            </a>
+          </div>
         </div>
       </section>
 
@@ -160,6 +238,50 @@
           </div>
 
           <p class="schedule-disclaimer">✓ Horarios sujetos a disponibilidad.</p>
+        </div>
+      </section>
+
+      <section class="scholarship-section" id="beca" aria-labelledby="scholarship-title">
+        <div class="section-inner">
+          <div class="section-heading">
+            <p class="eyebrow">Promoción</p>
+            <h2 id="scholarship-title">BECA VENEZIA</h2>
+            <p class="scholarship-subtitle">Elige cómo empezar tu carrera: por tu cuenta o con el apoyo de la Beca Venezia.</p>
+          </div>
+
+          <div class="scholarship-grid">
+            <article class="scholarship-card">
+              <p class="scholarship-plan-name">Sin Beca</p>
+              <div class="scholarship-price">
+                <span class="scholarship-amount">$2,300</span>
+                <span class="scholarship-price-label">Inscripción</span>
+              </div>
+              <div class="scholarship-price scholarship-price-secondary">
+                <span class="scholarship-amount">$1,900</span>
+                <span class="scholarship-price-label">Mensualidad</span>
+              </div>
+              <ul class="scholarship-features">
+                <li>El alumno lleva todo su material</li>
+              </ul>
+            </article>
+
+            <article class="scholarship-card scholarship-card-featured">
+              <p class="scholarship-badge">Recomendada</p>
+              <p class="scholarship-plan-name">Con Beca Venezia</p>
+              <div class="scholarship-price">
+                <span class="scholarship-amount">$999.99</span>
+                <span class="scholarship-price-label">Inscripción</span>
+              </div>
+              <div class="scholarship-price scholarship-price-secondary">
+                <span class="scholarship-amount">$1,600</span>
+                <span class="scholarship-price-label">Mensualidad</span>
+              </div>
+              <ul class="scholarship-features">
+                <li>Te prestamos el 80% de las herramientas para practicar</li>
+              </ul>
+              <a class="scholarship-cta" href="#reserva">Quiero la Beca Venezia</a>
+            </article>
+          </div>
         </div>
       </section>
 

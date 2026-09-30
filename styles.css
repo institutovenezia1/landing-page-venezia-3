@@ -122,54 +122,37 @@ h3 {
   background: #31e06f;
 }
 
-/* Hero estilo Apple: foto a pantalla completa, un solo acento dorado */
+/* Hero estilo boutique/Apple: serif elegante + layout dividido con foto real */
 .hero {
-  --hero-bg: #000;
+  --hero-bg: #0a0a0c;
   --hero-text: #f5f5f7;
-  --hero-text-soft: rgba(245, 245, 247, 0.78);
+  --hero-text-soft: rgba(245, 245, 247, 0.72);
   --hero-accent: linear-gradient(135deg, #ffe9b8 0%, #f0c565 32%, #d9a53f 68%, #c68f2e 100%);
   --hero-accent-ink: #2a1f0d;
   --hero-trust: #34c759;
 
   position: relative;
   isolation: isolate;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
   width: min(1240px, calc(100% - 32px));
-  aspect-ratio: 16 / 10;
-  max-height: min(760px, calc(100svh - 32px));
-  min-height: 460px;
   margin: 16px auto;
   overflow: hidden;
   border-radius: 20px;
   background: var(--hero-bg);
   color: var(--hero-text);
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.35);
   font-family:
     -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue",
     Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
 }
 
-.hero-bg,
-.hero-overlay {
+.hero-ambient {
   position: absolute;
   z-index: -1;
   inset: 0;
-  width: 100%;
-  height: 100%;
-}
-
-.hero-bg {
-  object-fit: cover;
-  object-position: 50% 32%;
-}
-
-.hero-overlay {
   background:
-    linear-gradient(180deg, rgba(0, 0, 0, 0.55) 0%, rgba(0, 0, 0, 0.08) 22%, rgba(0, 0, 0, 0.04) 45%, rgba(0, 0, 0, 0.72) 82%, rgba(0, 0, 0, 0.88) 100%),
-    radial-gradient(120% 90% at 14% 8%, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0) 42%);
+    radial-gradient(85% 120% at 100% 0%, rgba(226, 183, 106, 0.18) 0%, rgba(226, 183, 106, 0) 55%),
+    radial-gradient(60% 80% at 0% 100%, rgba(226, 183, 106, 0.08) 0%, rgba(226, 183, 106, 0) 60%);
 }
 
 .hero-nav {
@@ -177,10 +160,9 @@ h3 {
   align-items: center;
   justify-content: space-between;
   gap: 16px;
-  margin: 14px;
-  border-radius: 999px;
-  padding: 10px 12px 10px 22px;
-  background: rgba(20, 20, 20, 0.28);
+  padding: 18px clamp(20px, 4vw, 44px);
+  border-bottom: 1px solid rgba(245, 245, 247, 0.1);
+  background: rgba(10, 10, 12, 0.45);
   -webkit-backdrop-filter: blur(20px);
   backdrop-filter: blur(20px);
 }
@@ -210,12 +192,19 @@ h3 {
   outline: none;
 }
 
+.hero-columns {
+  display: grid;
+  grid-template-columns: minmax(300px, 1fr) minmax(0, 0.92fr);
+  align-items: center;
+  gap: clamp(28px, 4vw, 56px);
+  padding: clamp(32px, 5vw, 60px) clamp(20px, 4vw, 44px) clamp(40px, 6vw, 68px);
+}
+
 .hero-content {
   display: grid;
   justify-items: start;
-  gap: 14px;
-  max-width: 640px;
-  padding: 0 clamp(20px, 4vw, 56px) clamp(24px, 4vw, 52px);
+  gap: 16px;
+  max-width: 480px;
 }
 
 .hero-badge {
@@ -237,19 +226,33 @@ h3 {
   max-width: none;
   margin: 0;
   color: var(--hero-text);
-  font-size: clamp(28px, 4.6vw, 52px);
-  font-weight: 700;
-  line-height: 1.05;
-  letter-spacing: -0.03em;
+  font-family: "Playfair Display", "SF Pro Display", Georgia, serif;
+  font-size: clamp(30px, 4.4vw, 50px);
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+}
+
+.hero h1 em {
+  color: var(--hero-text);
+  font-style: italic;
+  font-weight: 500;
+}
+
+.hero-divider {
+  width: 56px;
+  height: 3px;
+  border-radius: 999px;
+  background: var(--hero-accent);
 }
 
 .hero-subtitle {
-  max-width: 520px;
+  max-width: 440px;
   margin: 0;
   color: var(--hero-text-soft);
-  font-size: clamp(15px, 1.6vw, 19px);
+  font-size: clamp(15px, 1.6vw, 18px);
   font-weight: 400;
-  line-height: 1.45;
+  line-height: 1.5;
 }
 
 .hero-actions {
@@ -299,22 +302,46 @@ h3 {
   color: var(--hero-trust);
 }
 
+.hero-media {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  border-radius: 18px;
+  box-shadow:
+    0 24px 60px rgba(226, 183, 106, 0.16),
+    0 12px 30px rgba(0, 0, 0, 0.4);
+}
+
+.hero-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 26%;
+}
+
+@media (max-width: 780px) {
+  .hero-columns {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-content {
+    max-width: none;
+  }
+
+  .hero-media {
+    aspect-ratio: 16 / 10;
+    order: -1;
+  }
+}
+
 @media (max-width: 700px) {
   .hero {
-    aspect-ratio: auto;
-    min-height: min(640px, calc(100svh - 24px));
-    max-height: none;
     width: calc(100% - 24px);
     margin: 12px auto;
   }
 
-  .hero-bg {
-    object-position: 50% 34%;
-  }
-
   .hero-nav {
-    margin: 10px;
-    padding: 8px 8px 8px 16px;
+    padding: 14px 16px;
   }
 
   .hero-logo {
@@ -325,6 +352,10 @@ h3 {
   .hero-nav-cta {
     padding: 7px 12px;
     font-size: 0.8125rem;
+  }
+
+  .hero-columns {
+    padding: 20px 20px 36px;
   }
 
   .hero-actions {
@@ -423,32 +454,70 @@ h3 {
   font-size: 4.25rem;
 }
 
-.graduation-section {
-  background: var(--paper-warm);
+.stats-section {
+  background: var(--dark);
 }
 
-.graduation-inner {
+.stats-inner {
+  padding: 52px 0;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.stat-item {
   display: grid;
   justify-items: center;
-  padding: 96px 0;
+  gap: 10px;
+  padding: 8px 16px;
+  border-right: 1px solid rgba(245, 245, 247, 0.1);
+  color: var(--white);
   text-align: center;
+  transition: transform 170ms ease;
 }
 
-.graduation-heading {
+.stat-item:last-child {
+  border-right: 0;
+}
+
+.stat-social:hover,
+.stat-social:focus-visible {
+  transform: translateY(-3px);
+  outline: none;
+}
+
+.stat-icon {
   display: grid;
-  justify-items: center;
-  gap: 18px;
-  max-width: 820px;
-  margin-bottom: 0;
-}
-
-.graduation-heading .eyebrow {
+  width: 52px;
+  height: 52px;
+  place-items: center;
+  border: 1px solid rgba(212, 175, 55, 0.4);
+  border-radius: 999px;
+  background: rgba(212, 175, 55, 0.14);
   color: var(--gold);
+  font-size: 1.4rem;
 }
 
-.graduation-heading h2 {
-  font-size: clamp(2.1rem, 4.6vw, 3.35rem);
-  line-height: 1.05;
+.stat-icon svg {
+  width: 24px;
+  height: 24px;
+}
+
+.stat-number {
+  font-size: 1.2rem;
+  font-weight: 900;
+  color: var(--white);
+}
+
+.stat-label {
+  color: rgba(245, 245, 247, 0.65);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
 }
 
 .testimonial-section {
@@ -521,6 +590,254 @@ h3 {
   font-size: 1.18rem;
   font-weight: 650;
   line-height: 1.4;
+}
+
+.courses-photo-section {
+  background: var(--white);
+}
+
+.courses-photo-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+  max-width: 820px;
+  margin: 0 auto;
+}
+
+.course-photo-card {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  overflow: hidden;
+  aspect-ratio: 4 / 5;
+  border-radius: 16px;
+  box-shadow: var(--shadow);
+  transition: transform 200ms cubic-bezier(0.25, 0.1, 0.25, 1), box-shadow 200ms cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+.course-photo-card:hover,
+.course-photo-card:focus-visible {
+  transform: translateY(-4px);
+  box-shadow: 0 24px 48px rgba(17, 17, 17, 0.16);
+  outline: none;
+}
+
+.course-photo-img {
+  position: absolute;
+  z-index: -2;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.course-photo-overlay {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 40%, rgba(0, 0, 0, 0.6) 76%, rgba(0, 0, 0, 0.9) 100%);
+}
+
+.course-photo-body {
+  display: grid;
+  gap: 6px;
+  padding: 24px 20px 22px;
+}
+
+.course-photo-body h3 {
+  margin-bottom: 0;
+  color: #f5f5f7;
+  font-size: 1.18rem;
+}
+
+.course-photo-body p {
+  margin-bottom: 0;
+  color: rgba(245, 245, 247, 0.82);
+  font-size: 0.92rem;
+}
+
+.course-photo-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 4px;
+  color: #ffdf9e;
+  font-size: 0.85rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  transition: gap 170ms ease;
+}
+
+.course-photo-card:hover .course-photo-link {
+  gap: 10px;
+}
+
+.scholarship-section {
+  background: var(--paper-warm);
+}
+
+.scholarship-subtitle {
+  max-width: 520px;
+  margin: 10px auto 0;
+  color: var(--text-soft);
+  font-size: 1.02rem;
+  text-align: center;
+}
+
+.scholarship-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+  margin-top: 40px;
+  align-items: stretch;
+}
+
+.scholarship-card {
+  position: relative;
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 22px;
+  padding: 36px 30px 32px;
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+}
+
+.scholarship-card-featured {
+  background: linear-gradient(160deg, #17130a 0%, #23190c 100%);
+  border: 1px solid rgba(240, 197, 101, 0.4);
+  color: #f5f5f7;
+  box-shadow: 0 22px 48px rgba(198, 143, 46, 0.28);
+}
+
+.scholarship-badge {
+  position: absolute;
+  top: -14px;
+  right: 28px;
+  background: linear-gradient(135deg, #ffe9b8 0%, #f0c565 32%, #d9a53f 68%, #c68f2e 100%);
+  color: #2a1f0d;
+  font-size: 0.72rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 6px 14px;
+  border-radius: 999px;
+  box-shadow: 0 8px 18px rgba(198, 143, 46, 0.4);
+}
+
+.scholarship-plan-name {
+  font-size: 0.85rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-soft);
+  margin-bottom: 18px;
+}
+
+.scholarship-card-featured .scholarship-plan-name {
+  color: #ffdf9e;
+}
+
+.scholarship-price {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.scholarship-card-featured .scholarship-price {
+  border-bottom: 1px solid rgba(245, 245, 247, 0.14);
+}
+
+.scholarship-price-secondary {
+  border-bottom: 0;
+}
+
+.scholarship-amount {
+  font-size: 1.9rem;
+  font-weight: 900;
+  color: var(--black);
+  letter-spacing: -0.01em;
+}
+
+.scholarship-card-featured .scholarship-amount {
+  color: #f5f5f7;
+}
+
+.scholarship-price-label {
+  font-size: 0.92rem;
+  color: var(--text-soft);
+}
+
+.scholarship-card-featured .scholarship-price-label {
+  color: rgba(245, 245, 247, 0.72);
+}
+
+.scholarship-features {
+  list-style: none;
+  margin: 20px 0 0;
+  padding: 0;
+  display: grid;
+  gap: 10px;
+  flex: 1;
+}
+
+.scholarship-features li {
+  font-size: 0.96rem;
+  line-height: 1.4;
+  padding-left: 26px;
+  position: relative;
+  color: var(--text-soft);
+}
+
+.scholarship-card-featured .scholarship-features li {
+  color: rgba(245, 245, 247, 0.72);
+}
+
+.scholarship-features li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: var(--green-dark);
+  font-weight: 900;
+}
+
+.scholarship-card-featured .scholarship-features li::before {
+  color: #f0c565;
+}
+
+.scholarship-cta {
+  display: block;
+  text-align: center;
+  margin-top: 24px;
+  padding: 15px 20px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #ffe9b8 0%, #f0c565 32%, #d9a53f 68%, #c68f2e 100%);
+  color: #2a1f0d;
+  font-weight: 900;
+  font-size: 0.98rem;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6), 0 12px 28px rgba(224, 171, 72, 0.45);
+  transition: transform 170ms ease, box-shadow 170ms ease;
+}
+
+.scholarship-cta:hover {
+  transform: translateY(-2px);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6), 0 16px 34px rgba(224, 171, 72, 0.55);
+}
+
+@media (max-width: 700px) {
+  .scholarship-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .scholarship-badge {
+    right: 20px;
+  }
 }
 
 .schedule-section {
@@ -934,6 +1251,10 @@ h3 {
     grid-template-columns: 1fr;
   }
 
+  .courses-photo-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
   .offer-action {
     transform: none;
   }
@@ -951,12 +1272,32 @@ h3 {
     width: calc(100% - 32px);
   }
 
-  .graduation-inner {
-    padding: 64px 0;
+  .stats-inner {
+    padding: 40px 0;
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+
+  .stat-item {
+    border-right: 0;
+    border-bottom: 1px solid rgba(245, 245, 247, 0.1);
+    padding-bottom: 24px;
+  }
+
+  .stat-item:last-child {
+    border-bottom: 0;
+    padding-bottom: 8px;
   }
 
   .testimonial-inner {
     padding: 48px 0;
+  }
+
+  .courses-photo-grid {
+    grid-template-columns: 1fr;
   }
 
   .schedule-card {
