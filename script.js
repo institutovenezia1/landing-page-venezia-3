@@ -10,6 +10,14 @@ const reservationAmounts = {
   inscripcion_999: 999.99,
 };
 
+const reservationLabels = {
+  apartado_399: "Apartado",
+  inscripcion_999: "Inscripción completa",
+};
+
+const advisorSubmitButton = document.querySelector("#advisorSubmit");
+const advisorWhatsappNumber = "522464663437";
+
 const courseSchedules = {
   unas_acrilicas: [
     "Martes y Miércoles 9am a 11am",
@@ -119,6 +127,30 @@ function getSelectedReservationAmount(formData) {
   return reservationAmounts[selectedReservation] || 399.99;
 }
 
+function getSelectedReservationLabel(formData) {
+  const selectedReservation = String(formData.get("tipoReserva") || "apartado_399");
+  return reservationLabels[selectedReservation] || "Apartado";
+}
+
+function buildAdvisorWhatsappMessage(formData) {
+  const nombre = String(formData.get("nombre") || "").trim();
+  const whatsapp = String(formData.get("whatsapp") || "").trim();
+  const courseLabel = courseSelect?.selectedOptions?.[0]?.textContent?.trim() || "";
+  const horarioPreferido = String(formData.get("horarioPreferido") || "").trim();
+  const reservationLabel = getSelectedReservationLabel(formData);
+  const amount = getSelectedReservationAmount(formData);
+
+  return [
+    "Hola, quiero apartar mi lugar con un asesor 👋",
+    "",
+    `Nombre: ${nombre}`,
+    `WhatsApp: ${whatsapp}`,
+    `Curso: ${courseLabel}`,
+    `Horario: ${horarioPreferido}`,
+    `Tipo de reserva: ${reservationLabel} ($${amount})`,
+  ].join("\n");
+}
+
 function getProspectPayload(formData) {
   return {
     nombre: String(formData.get("nombre") || "").trim(),
@@ -205,4 +237,49 @@ reservationForm?.addEventListener("submit", async (event) => {
       submitButton.textContent = originalButtonText;
     }
   }
+});
+
+advisorSubmitButton?.addEventListener("click", async () => {
+  if (!reservationForm || !reservationForm.reportValidity()) return;
+
+  const formData = new FormData(reservationForm);
+  const originalButtonText = advisorSubmitButton.textContent;
+
+  // Abrimos la pestaña de inmediato (dentro del gesto del click) para evitar
+  // que el navegador bloquee el pop-up mientras esperamos la respuesta del servidor.
+  const whatsappWindow = window.open("", "_blank");
+
+  advisorSubmitButton.disabled = true;
+  advisorSubmitButton.textContent = "PREPARANDO WHATSAPP...";
+  setFormStatus("Estamos registrando tu solicitud...", "loading");
+
+  try {
+    const response = await fetch("/api/create-prospect", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(getProspectPayload(formData)),
+    });
+
+    if (!response.ok) {
+      const result = await response.json().catch(() => ({}));
+      console.error("create-prospect (asesor) error", result);
+    }
+  } catch (error) {
+    console.error("create-prospect (asesor) network error", error);
+  }
+
+  const advisorMessage = buildAdvisorWhatsappMessage(formData);
+  const advisorUrl = `https://wa.me/${advisorWhatsappNumber}?text=${encodeURIComponent(advisorMessage)}`;
+
+  if (whatsappWindow) {
+    whatsappWindow.location.href = advisorUrl;
+  } else {
+    window.location.assign(advisorUrl);
+  }
+
+  setFormStatus("Listo. Te abrimos WhatsApp para hablar con un asesor.", "info");
+  advisorSubmitButton.disabled = false;
+  advisorSubmitButton.textContent = originalButtonText;
 });
