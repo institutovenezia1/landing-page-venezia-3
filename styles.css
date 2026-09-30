@@ -1256,6 +1256,39 @@ h3 {
   width: 100%;
 }
 
+.form-actions {
+  display: grid;
+  gap: 10px;
+}
+
+.form-actions-divider {
+  justify-self: center;
+  color: var(--text-soft);
+  font-size: 0.8rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.button-outline {
+  background: var(--white);
+  color: var(--green-dark);
+  border: 2px solid var(--green);
+  box-shadow: none;
+}
+
+.button-outline:hover,
+.button-outline:focus-visible {
+  background: rgba(37, 211, 102, 0.1);
+}
+
+.form-actions-note {
+  margin: 0;
+  color: var(--text-soft);
+  font-size: 0.85rem;
+  text-align: center;
+}
+
 .form-status {
   margin: 0;
   border-radius: 8px;
