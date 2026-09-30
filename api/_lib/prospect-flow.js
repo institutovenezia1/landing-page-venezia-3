@@ -7,6 +7,7 @@ const DEFAULT_ACCESS_INTEREST = "Beca Venezia";
 const COURSES = {
   unas_acrilicas: "Uñas Acrílicas Profesionales",
   barberia: "Corte y Barbería Profesional",
+  pestanas: "Cejas y Pestañas Profesional",
 };
 
 const COURSE_SCHEDULES = {
@@ -21,6 +22,10 @@ const COURSE_SCHEDULES = {
     "Sábado 12pm a 3pm",
     "Sábado 4pm a 7pm",
     "Domingo 9am a 12pm",
+  ],
+  pestanas: [
+    "Sábado 2pm a 6pm",
+    "Domingo 9am a 1pm",
   ],
 };
 

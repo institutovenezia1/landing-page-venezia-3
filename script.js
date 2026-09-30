@@ -23,6 +23,10 @@ const courseSchedules = {
     "Sábado 4pm a 7pm",
     "Domingo 9am a 12pm",
   ],
+  pestanas: [
+    "Sábado 2pm a 6pm",
+    "Domingo 9am a 1pm",
+  ],
 };
 
 // Fecha de inicio de cada grupo; se muestra al elegir el horario.
@@ -38,6 +42,10 @@ const scheduleStartDates = {
     "Sábado 12pm a 3pm": "sábado 17 de octubre",
     "Sábado 4pm a 7pm": "sábado 17 de octubre",
     "Domingo 9am a 12pm": "domingo 18 de octubre",
+  },
+  pestanas: {
+    "Sábado 2pm a 6pm": "sábado 17 de octubre",
+    "Domingo 9am a 1pm": "domingo 18 de octubre",
   },
 };
 
