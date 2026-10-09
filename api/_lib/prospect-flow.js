@@ -1,6 +1,6 @@
 const crypto = require("node:crypto");
 
-const LANDING_SOURCE = "Landing Venezia 3.0";
+const LANDING_SOURCE = "Landing Page";
 const DEFAULT_BRANCH = "Tlaxcala";
 const DEFAULT_ACCESS_INTEREST = "Beca Venezia";
 
