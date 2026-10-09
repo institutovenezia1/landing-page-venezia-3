@@ -16,7 +16,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;1,500&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;900&family=Playfair+Display:ital,wght@0,500;0,600;1,500&display=swap"
       rel="stylesheet"
     >
     <link rel="stylesheet" href="styles.css">
@@ -48,7 +48,12 @@
         <div class="hero-ambient" aria-hidden="true"></div>
 
         <nav class="hero-nav" aria-label="Navegación principal">
-          <a class="hero-logo" href="#hero" aria-label="Venezia">VENEZIA</a>
+          <a class="hero-logo" href="#hero" aria-label="Venezia">
+            <svg class="v-mark" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M2 3h4.6l5.4 14.2L17.4 3H22L13.6 21h-3.2L2 3z"></path>
+            </svg>
+            VENEZIA
+          </a>
           <a class="hero-nav-cta" href="#reserva">Aparta $399.99</a>
         </nav>
 
@@ -167,6 +172,7 @@
         <div class="section-inner">
           <div class="section-heading">
             <p class="eyebrow">Nuestros cursos</p>
+            <span class="gold-divider" aria-hidden="true"></span>
             <h2 id="courses-photo-title">CURSOS DISPONIBLES</h2>
           </div>
 
@@ -209,6 +215,7 @@
         <div class="section-inner schedule-inner">
           <div class="section-heading schedule-heading">
             <p class="eyebrow">Cursos y horarios disponibles</p>
+            <span class="gold-divider" aria-hidden="true"></span>
             <h2 id="schedule-title">CURSOS Y HORARIOS DISPONIBLES</h2>
           </div>
 
@@ -271,6 +278,7 @@
         <div class="section-inner">
           <div class="section-heading">
             <p class="eyebrow">Promoción</p>
+            <span class="gold-divider" aria-hidden="true"></span>
             <h2 id="scholarship-title">BECA VENEZIA</h2>
             <p class="scholarship-subtitle">Elige cómo empezar tu carrera: por tu cuenta o con el apoyo de la Beca Venezia.</p>
           </div>
@@ -315,6 +323,7 @@
         <div class="reservation-layout">
           <div class="reservation-copy">
             <p class="eyebrow">Reserva</p>
+            <span class="gold-divider" aria-hidden="true"></span>
             <h2 id="reservation-title">RESERVA TU LUGAR</h2>
             <p class="scarcity-alert">
               <strong>🔥 ÚLTIMOS 3 CUPOS CON EL 80% DE MATERIAL</strong>
@@ -403,9 +412,22 @@
     </main>
 
     <footer class="site-footer">
-      <span>Venezia</span>
+      <div class="footer-brand">
+        <svg class="v-mark" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M2 3h4.6l5.4 14.2L17.4 3H22L13.6 21h-3.2L2 3z"></path>
+        </svg>
+        <div>
+          <span class="footer-name">Venezia</span>
+          <span class="footer-tagline">Disciplina crea libertad</span>
+        </div>
+      </div>
       <a href="#reserva">Apartar mi lugar</a>
     </footer>
+
+    <div class="mobile-cta-bar" role="navigation" aria-label="Apartar lugar">
+      <a class="mobile-cta-btn mobile-cta-primary" href="#reserva">Apartar en línea</a>
+      <a class="mobile-cta-btn mobile-cta-outline" href="#reserva">Hablar con asesor</a>
+    </div>
 
     <script src="script.js"></script>
   </body>
