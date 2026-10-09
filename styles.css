@@ -46,11 +46,31 @@ img {
 
 .eyebrow {
   margin: 0;
-  color: var(--text-soft);
+  color: #b4883a;
   font-size: 0.78rem;
   font-weight: 950;
-  letter-spacing: 0;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
+}
+
+.gold-divider {
+  position: relative;
+  display: block;
+  width: 56px;
+  height: 1px;
+  margin: 10px 0 2px;
+  background: linear-gradient(90deg, #c68f2e, transparent);
+}
+
+.gold-divider::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 6px;
+  height: 6px;
+  transform: translate(-2px, -50%) rotate(45deg);
+  background: #c68f2e;
 }
 
 h1,
@@ -72,9 +92,12 @@ h1 {
 h2 {
   margin-bottom: 0;
   color: var(--black);
-  font-size: 2.85rem;
-  line-height: 1;
-  font-weight: 950;
+  font-family: "Cinzel", Georgia, serif;
+  font-size: 2.65rem;
+  line-height: 1.08;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
 }
 
 h3 {
@@ -168,10 +191,20 @@ h3 {
 }
 
 .hero-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
   color: var(--hero-text);
   font-size: 1rem;
   font-weight: 700;
   letter-spacing: 0.24em;
+}
+
+.v-mark {
+  width: 16px;
+  height: 16px;
+  fill: #f0c565;
+  flex-shrink: 0;
 }
 
 .hero-nav-cta {
@@ -775,10 +808,30 @@ h3 {
 }
 
 .scholarship-card-featured {
+  position: relative;
   background: linear-gradient(160deg, #17130a 0%, #23190c 100%);
   border: 1px solid rgba(240, 197, 101, 0.4);
   color: #f5f5f7;
   box-shadow: 0 22px 48px rgba(198, 143, 46, 0.28);
+}
+
+.scholarship-card-featured::before {
+  content: "V";
+  position: absolute;
+  z-index: 0;
+  right: 14px;
+  bottom: 6px;
+  font-family: "Cinzel", serif;
+  font-size: 5.5rem;
+  font-weight: 900;
+  line-height: 1;
+  color: rgba(240, 197, 101, 0.1);
+  pointer-events: none;
+}
+
+.scholarship-card-featured > * {
+  position: relative;
+  z-index: 1;
 }
 
 .scholarship-badge {
@@ -1318,19 +1371,41 @@ h3 {
   justify-content: space-between;
   gap: 18px;
   min-height: 76px;
-  padding: 18px max(22px, calc((100vw - 1180px) / 2));
-  border-top: 1px solid var(--line);
-  background: var(--white);
-  color: var(--black);
+  padding: 22px max(22px, calc((100vw - 1180px) / 2));
+  background: #0a0a0c;
+  color: #f5f5f7;
 }
 
-.site-footer span {
+.footer-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.footer-brand .v-mark {
+  width: 22px;
+  height: 22px;
+}
+
+.footer-name {
+  display: block;
   font-weight: 950;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.footer-tagline {
+  display: block;
+  margin-top: 2px;
+  color: rgba(240, 197, 101, 0.78);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
 }
 
 .site-footer a {
-  color: var(--green-dark);
+  color: #f0c565;
   font-weight: 950;
 }
 
@@ -1482,5 +1557,54 @@ h3 {
 
   .site-footer {
     padding: 18px 16px;
+  }
+}
+
+.mobile-cta-bar {
+  display: none;
+}
+
+@media (max-width: 700px) {
+  .mobile-cta-bar {
+    position: fixed;
+    z-index: 40;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    gap: 8px;
+    padding: 10px 12px calc(10px + env(safe-area-inset-bottom, 0px));
+    background: rgba(10, 10, 12, 0.92);
+    border-top: 1px solid rgba(240, 197, 101, 0.3);
+    -webkit-backdrop-filter: blur(14px);
+    backdrop-filter: blur(14px);
+  }
+
+  .mobile-cta-btn {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 46px;
+    border-radius: 999px;
+    padding: 10px 12px;
+    font-size: 0.82rem;
+    font-weight: 900;
+    text-align: center;
+    white-space: nowrap;
+  }
+
+  .mobile-cta-primary {
+    background: var(--green);
+    color: var(--black);
+  }
+
+  .mobile-cta-outline {
+    border: 1.5px solid #f0c565;
+    color: #f0c565;
+  }
+
+  body {
+    padding-bottom: 68px;
   }
 }
